@@ -40,7 +40,8 @@ def contact(request):
         }
     ]
     context = {
+        # 'page_title': 'контакты'.title()  # НЕ ДЕЛАТЬ ТАК (нарушение принципов MVC)
         'page_title': 'контакты',
-        'locations': locations
+        'locations': locations  # тестим случай с отсутствием locations (условие if)
     }
     return render(request, 'mainapp/contact.html', context)
