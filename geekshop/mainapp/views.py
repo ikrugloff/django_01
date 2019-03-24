@@ -4,7 +4,11 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'mainapp/index.html')  # / в начале не ставится, т.к. адрес относительный корня для шаблонов
+    context = {
+        'page_title': 'Главная'
+    }
+    return render(request, 'mainapp/index.html', context)  # / в начале не ставится, т.к. адрес относительный корня
+    # для шаблонов
 
 
 def products(request):
