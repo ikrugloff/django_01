@@ -20,7 +20,7 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # / (слэш) в конце обязательный, если добавили текст адреса
-    path('', mainapp.index),  # в конце вызываемой вьюхе () ненужны
-    path('products/', mainapp.products),
-    path('contact/', mainapp.contact)
+    path('', mainapp.index, name='index'),  # в конце вызываемой вьюхе () ненужны
+    path('products/', mainapp.products, name='products'),
+    path('contact/', mainapp.contact, name='contact')
 ]
