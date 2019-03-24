@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+import mainapp.views as mainapp
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  # / (слэш) в конце обязательный, если добавили текст адреса
+    path('', mainapp.index),  # в конце вызываемой вьюхе () ненужны
+    path('products/', mainapp.products),
+    path('contact/', mainapp.contact)
 ]
