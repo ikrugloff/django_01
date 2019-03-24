@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'page_title': 'Главная'
+        'page_title': 'Магазин/главная'
     }
     return render(request, 'mainapp/index.html', context)  # / в начале не ставится, т.к. адрес относительный корня
     # для шаблонов
