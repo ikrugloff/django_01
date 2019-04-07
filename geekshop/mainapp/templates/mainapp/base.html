@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>
         {% block title %}
-        	Магазин / {{ page_title }}
+        	Магазин / {{ page_title|default:"страница"|title }}
         {% endblock %}
     </title>
     {% block css %}
