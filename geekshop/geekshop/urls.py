@@ -14,13 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-import mainapp.views as mainapp
+from django.urls import path, re_path, include
 
 urlpatterns = [
+    re_path(r'^', include('mainapp.urls', namespace='main')),
+    re_path(r'^auth/', include('authapp.urls', namespace='auth')),
+
     path('admin/', admin.site.urls),  # / (слэш) в конце обязательный, если добавили текст адреса
-    path('', mainapp.index, name='index'),  # в конце вызываемой вьюхе () ненужны
-    path('products/', mainapp.products, name='products'),
-    path('contact/', mainapp.contact, name='contact')
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

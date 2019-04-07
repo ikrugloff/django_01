@@ -1,15 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from mainapp.models import ProductCategory, Product
-
-# Create your views here.
+from django.urls import reverse
 
 
 def index(request):
     context = {
         'page_title': 'главная'
     }
-    return render(request, 'mainapp/index.html', context)  # / в начале не ставится, т.к. адрес относительный корня
-    # для шаблонов
+    return render(request, 'mainapp/index.html', context)
 
 
 def products(request):
@@ -20,6 +18,11 @@ def products(request):
         'products': products
     }
     return render(request, 'mainapp/products.html', context)
+
+
+def category(request, pk):
+    print(f'выбрали {pk}')
+    return HttpResponseRedirect(reverse('main:products'))
 
 
 def contact(request):
