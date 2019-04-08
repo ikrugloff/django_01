@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from mainapp.models import ProductCategory, Product
 from basketapp.models import Basket
 from django.urls import reverse
+import random
 
 
 def get_basket(request):
@@ -11,25 +12,20 @@ def get_basket(request):
         return []
 
 
+def get_hot_product():
+    return random.choice(Product.objects.all())
+
+
+def get_same_products(hot_product):
+    return hot_product.category.product_set.exclude(pk=hot_product.pk)
+
+
 def index(request):
     context = {
         'page_title': 'главная',
         'basket': get_basket(request)
     }
     return render(request, 'mainapp/index.html', context)
-
-
-def products(request):
-    links_menu = ProductCategory.objects.all()
-    products = Product.objects.all()
-
-    context = {
-        'page_title': 'каталог',
-        'products': products,
-        'links_menu': links_menu,
-        'basket': get_basket(request),
-    }
-    return render(request, 'mainapp/products.html', context)
 
 
 def category(request, pk):
@@ -51,6 +47,30 @@ def category(request, pk):
     }
 
     return render(request, 'mainapp/products_list.html', context)
+
+
+def products(request):
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
+
+    context = {
+        'page_title': 'каталог',
+        'links_menu': ProductCategory.objects.all(),
+        'basket': get_basket(request),
+        'hot_product': hot_product,
+        'same_products': same_products,
+    }
+    return render(request, 'mainapp/products.html', context)
+
+
+def product(request, pk):
+    context = {
+        'title': 'продукт',
+        'links_menu': ProductCategory.objects.all(),
+        'basket': get_basket(request),
+        'object': get_object_or_404(Product, pk=pk),
+    }
+    return render(request, 'mainapp/product.html', context)
 
 
 def contact(request):
