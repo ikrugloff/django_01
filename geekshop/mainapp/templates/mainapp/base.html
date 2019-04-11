@@ -4,22 +4,20 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-        {% block title %}
-        	Магазин / {{ page_title|default:"страница"|title }}
-        {% endblock %}
-    </title>
-    {% block css %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	    <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
-    {% endblock %}
-    {% block js %}
-    {% endblock %}
+		Магазин / {{ page_title|default:"страница"|title }}
+	</title>
+	{% block css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+	{% endblock %}
+	{% block js %}
+	{% endblock %}
 </head>
 <body>
 	<div class="container">
 		{% block container %}
 		{% endblock %}
-
+		
 		<div class="clr"></div>
 
 	</div>
@@ -49,7 +47,7 @@
             <a href="#" class="social4"></a>
         </div>
         <p class="small">Положения &amp; Условия  /  Конфиденциальность &amp; Cookies</p>
-    </div>
-
+    </div>	
+	
 </body>
 </html>
